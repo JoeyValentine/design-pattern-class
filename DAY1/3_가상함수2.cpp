@@ -6,11 +6,13 @@
 
 // C++ : 사용자가 자원관리해야 합니다.
 //       소멸자가 아주 중요 합니다.
-
+// 핵심 1. 모든 기반 클래스의 소멸자는 반드시 가상함수로 만들어야 합니다.
+//     2. 기반 클래스의 소멸자가 가상함수 라면 모든 파생 클래스의 소멸자도
+//        virtual 입니다.(virtual 을 붙이지 않아도)
 class Base
 {
 public:
-	~Base() {}
+	virtual ~Base() {}
 };
 class Derived : public Base
 {
