@@ -11,11 +11,25 @@
 
 class Shape
 {
+	int color;
 public:
 	virtual ~Shape() {}
 
+	// 아래 2개의 함수는 virtual 로 할까요 ? 하지 말까요 ?
+	void set_color(int c) { color = c; }
+	int  get_color()      { return c; }
+
+	// 모든 도형은 면적을 구할수 있습니다.
+	// virtual 할까요 ? 하지 말까요 ?
+	// => 각 도형의 면적을 구하는 방법은 다릅니다.
+	// => 각 도형설계자가 구현을 다시 제공해야 합니다.! 
+	// => virtual !!
+	virtual int get_area() { return -1; }
+
+
 	virtual void draw() { std::cout << "draw shape" << std::endl; }
 };
+
 
 class Rect : public Shape
 {
