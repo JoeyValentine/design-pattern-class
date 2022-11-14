@@ -39,12 +39,22 @@ public:
 	}
 };
 
+// 이제 Validation 정책을 변경하려면 
+// "Edit"의 파생 클래스를 만들어서 "validate" 가상함수를 재정의!!
+// => 기존 코드의 변경 이 아닌, 기존 코드의 확장
 
-
-
+class NumEdit : public Edit
+{
+public:
+	virtual bool validate(char c)
+	{
+		return isdigit(c);
+	}
+};
 int main()
 {
-	Edit e;
+//	Edit e;
+	NumEdit e;
 	while (1)
 	{
 		std::cout << e.getData() << std::endl;
