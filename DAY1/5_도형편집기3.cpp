@@ -6,25 +6,27 @@
 //	  그래야, Shape* 로 모든 도형을 관리할때
 //    해당 특징을 사용할수 있다.
 
+// 4. 기반 클래스 멤버 함수중 파생 클래스가 재정의 하게 되는 함수는
+//    반드시 "가상함수(virtual)" 로 설계 되어야 한다.!
 
 class Shape
 {
 public:
 	virtual ~Shape() {}
 
-	void draw() { std::cout << "draw shape" << std::endl; }
+	virtual void draw() { std::cout << "draw shape" << std::endl; }
 };
 
 class Rect : public Shape
 {
 public:
-	void draw() { std::cout << "draw rect" << std::endl; }
+	virtual void draw() override { std::cout << "draw rect" << std::endl; }
 };
 
 class Circle : public Shape
 {
 public:
-	void draw() { std::cout << "draw circle" << std::endl; }
+	virtual void draw() override { std::cout << "draw circle" << std::endl; }
 };
 
 int main()
