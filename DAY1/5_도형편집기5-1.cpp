@@ -67,6 +67,8 @@ int main()
 
 			// 방법 1. k 번째 도형이 어떤 도형인지
 			//        dynamic_cast 로 조사하는 방법
+			// => 새로운 도형이 추가되면 항상 코드가 추가되어야 한다.
+			// => if~else, switch~case 는 대부분 OCP를 만족할수 없다
 			if (dynamic_cast<Rect*>(v[k]) != nullptr )
 			{
 				// k 번재 도형은 Rect 이다.!!
