@@ -1,6 +1,10 @@
 #include <mutex>
 
 // 방법 1. 변하는 것을 가상함수로! - template method!
+// => List 뿐 아니라 다양한 컨테이너(컬렉션)이 존재 한다.
+// => 현재 디자인은 동기화 하는 유사한 코드가 재사용되지 않고,,
+//    각각 따로 구현해야 한다.
+
 
 template<typename T> class List
 {	
