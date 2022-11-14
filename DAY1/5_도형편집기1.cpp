@@ -27,6 +27,6 @@ public:
 int main()
 {
 //	std::vector<Rect*>	v; // Rect 만 보관
-	std::vector<Sahpe*> v; // 모든 도형을 보관!!!
+	std::vector<Shape*> v; // 모든 도형을 보관!!!
 }
 
