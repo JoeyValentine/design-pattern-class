@@ -10,9 +10,7 @@
 struct IValidator
 {
 	virtual bool validate(const std::string& s, char c) = 0;
-
 	virtual bool iscomplete(const std::string& s){return true;}
-
 	virtual ~IValidator() {}
 };
 
@@ -20,12 +18,16 @@ struct IValidator
 
 
 
-
-
 class Edit
 {
 	std::string data;
+	//==========================================
+	IValidator* pval = nullptr;
 public:
+	void setValidator(IValidator* p) { pval = p; }
+	//==================================
+
+
 	std::string getData()
 	{
 		data.clear();
@@ -36,7 +38,7 @@ public:
 
 			if (c == 13) break;	
 
-			if (isdigit(c))
+			if ( pval->validate(data, c) )
 			{
 				data.push_back(c);
 
