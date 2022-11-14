@@ -40,12 +40,13 @@ int main()
 		}
 		else if (cmd == 9)
 		{
-			for (auto p : v)
-				p->draw();
+			for (auto p : v)	// Shape* p 인데
+				p->draw();		// Shape 에는 "draw" 함수가 없다.!
 		}
 	}
 }
 // 위 코드는 왜?? 에러일까요 ?
 // 해결책은 뭘까요 ??
-// 1.
-// 2. 
+// 1. Shape* 인 p 를 Rect* 또는 Circle* 로 캐스팅해서 사용하자!
+//    => dynamic_cast 로 조사할수는 있지만 좋지 않다.
+// 2. Shape 안에 draw 를 넣자!! => 정답!!
