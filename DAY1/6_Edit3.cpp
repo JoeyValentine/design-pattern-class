@@ -51,12 +51,13 @@ public:
 	}
 };
 
-
-
-
 int main()
 {
 	Edit e;
+
+	// 현재 상태는 e 에 "validation 정책"을 연결하지 않았습니다.
+	// => 모든 문자 입력 가능
+
 	while (1)
 	{
 		std::cout << e.getData() << std::endl;
