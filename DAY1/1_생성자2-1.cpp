@@ -32,7 +32,7 @@ int main()
 	// Student 객체 생성해 보세요.. 
 	Student s("kim", 30, 15); // ok
 }
-
+/*
 // 초기화 리스트 문법
 class Student : public People
 {
@@ -43,3 +43,4 @@ public:
 //	Student() : 멤버 데이타 초기화(),  기반클래스생성자()  {}
 				// => 이렇게 해도 기반 클래스 부터!
 };
+*/
