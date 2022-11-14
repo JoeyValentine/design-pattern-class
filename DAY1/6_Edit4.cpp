@@ -71,10 +71,17 @@ int main()
 	LimitDigitValidator v(5);
 	e.setValidator(&v);  // v 객체를 사용해서 validation 해달라!!
 
+
+	LimitDigitValidator v2(15);
+	e.setValidator(&v2);
 	while (1)
 	{
 		std::cout << e.getData() << std::endl;
 	}
 }
-
-
+// strategy(전략패턴)
+// => 변하는것을 다른 클래스로
+// => 인터페이스 기반 교체
+// => 실행시간에 정책 교체 가능
+// => Edit 와 정책이 분리되어 있다.
+//    다른 입력 도구에서도 정책사용가능
