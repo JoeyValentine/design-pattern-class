@@ -1,6 +1,26 @@
 #include <iostream>
 #include <vector>
 
+// 6. 리팩토링 ( 기존 코드의 구조를 보다 좋은 구조로 변경하는 분야)
+// => "Replace Conditional With Polymorphism"
+//    "제어문(예제5-1)을 다형성(가상함수, 예제5-2)으로 변경하라!"
+//   
+
+
+// 7. 디자인 패턴
+// => 1994년 4명의 C++ 개발자가 저술한 책!
+// => 당시 유행하던 코딩 기법(스타일)에 "이름을 부여" 한것
+// => 23개의 이름!!!
+
+// 8. prototype 패턴 : 견본이 되는 객체를 만들어서
+//					  복사를 통해 객체를 생성하는 디자인 기본
+//					  clone() 가상함수
+//                    java 의 object 클래스 안에 clonable() 메소드
+//					  C# IClonable 인터페이스
+//					  Objective-C 의 copy 함수
+//					 모두 이 패턴의 응용 기술!!
+
+
 class Shape
 {
 	int color;
