@@ -55,6 +55,9 @@ int main()
 {
 //	Edit e;
 	NumEdit e;
+
+	// AddressEdit e2;
+
 	while (1)
 	{
 		std::cout << e.getData() << std::endl;
@@ -62,3 +65,9 @@ int main()
 }
 
 
+// template method
+// => 변하는 것을 가상함수로!
+// => 상속 기반의 패턴
+// => 실행시간 정책 교체는 될수 없다.
+// => NumEdit 가 정책을 포함 한다.
+//    NumEdit 의 정책은 NumEdit 만 사용가능
