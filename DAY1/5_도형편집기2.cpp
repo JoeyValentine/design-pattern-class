@@ -31,10 +31,12 @@ int main()
 		if (cmd == 1)
 		{
 			// 사각형 객체 생성
+			Rect* p = new Rect;
+			v.push_back(p);
 		}
 		else if (cmd == 2)
 		{
-
+			v.push_back( new Circle );
 		}
 		else if (cmd == 9)
 		{
@@ -43,4 +45,7 @@ int main()
 		}
 	}
 }
-
+// 위 코드는 왜?? 에러일까요 ?
+// 해결책은 뭘까요 ??
+// 1.
+// 2. 
