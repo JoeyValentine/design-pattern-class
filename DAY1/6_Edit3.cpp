@@ -9,12 +9,10 @@
 // 입력값을 Validation 하는 정책 클래스의 규칙(인터페이스)
 struct IValidator
 {
-	virtual bool validate(char c) = 0;
+	virtual bool validate(const std::string& s, char c) = 0;
 
-	virtual bool iscomplete(const std::string& s, char c)
-	{
-		return true;
-	}
+	virtual bool iscomplete(const std::string& s){return true;}
+
 	virtual ~IValidator() {}
 };
 
