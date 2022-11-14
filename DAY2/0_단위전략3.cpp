@@ -7,7 +7,6 @@ struct ISync
 	virtual void unlock() = 0;
 	virtual ~ISync() {}
 };
-
 template<typename T> class List
 {
 	ISync* psync = nullptr; // 동기화 정책을 담은 객체 연결.!
@@ -21,9 +20,22 @@ public:
 		if (psync) psync->unlock();
 	}
 };
+//===========================
+// 동기화 정책을 담은 정책 클래스 설계
+class linux_mutex_lock : public ISync
+{
+	// pthread_mutex_t mtx;
+public:
+	virtual void lock()   { } // pthread_acquire_mutex()
+	virtual void unlock() { } // release
+};
+
 List<int> st; 
 
 int main()
 {
+	linux_mutex_lock ml;
+	st.set_sync(&ml); // 컨테이너에 동기화 정책 연결
+
 	st.push_front(10);
 }
