@@ -6,6 +6,23 @@
 // 1. 변하는 것을 가상함수로 - Edit2. template method
 // 2. 변하는 것을 다른 클래스로!
 
+// 입력값을 Validation 하는 정책 클래스의 규칙(인터페이스)
+struct IValidator
+{
+	virtual bool validate(char c) = 0;
+
+	virtual bool iscomplete(const std::string& s, char c)
+	{
+		return true;
+	}
+	virtual ~IValidator() {}
+};
+
+// 주민 번호 : 901   1     확인버튼
+
+
+
+
 
 class Edit
 {
@@ -24,6 +41,7 @@ public:
 			if (isdigit(c))
 			{
 				data.push_back(c);
+
 				std::cout << c;
 			}
 		}
