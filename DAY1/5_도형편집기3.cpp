@@ -17,7 +17,7 @@ public:
 
 	// 아래 2개의 함수는 virtual 로 할까요 ? 하지 말까요 ?
 	void set_color(int c) { color = c; }
-	int  get_color()      { return c; }
+	int  get_color()      { return color; }
 
 	// 모든 도형은 면적을 구할수 있습니다.
 	// virtual 할까요 ? 하지 말까요 ?

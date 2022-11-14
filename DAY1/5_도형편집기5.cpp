@@ -8,7 +8,7 @@ public:
 	virtual ~Shape() {}
 
 	void set_color(int c) { color = c; }
-	int  get_color() { return c; }
+	int  get_color() { return color; }
 
 	virtual int get_area() { return -1; }
 
@@ -62,6 +62,7 @@ int main()
 		{
 			int k = -1;
 			std::cout << "몇번째를 복사할까요 >> ";
+
 			std::cin >> k;
 
 			// k번째 만들었던 도형의 복사본을 생성해서 v끝에 추가합니다.

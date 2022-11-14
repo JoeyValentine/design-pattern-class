@@ -14,7 +14,7 @@ public:
 	virtual ~Shape() {}
 
 	void set_color(int c) { color = c; }
-	int  get_color() { return c; }
+	int  get_color() { return color; }
 
 	virtual int get_area() { return -1; }
 
