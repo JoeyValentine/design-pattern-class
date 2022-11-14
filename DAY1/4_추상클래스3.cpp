@@ -19,11 +19,33 @@
 // java, C# : class 와 struct 는 값 타입 참조 타입의 커다란 차이지만
 // C++ : 단 한가지, 접근지정자 생략시 디폴트가 무엇인가!! 만있습니다.
 
+
 //class ICamera // 접근지정자 생략시 private 이 디폴트
 struct  ICamera // 접근지정자 생략시 public  이 디폴트
 {
 	virtual void Take() = 0;
+
+	virtual ~ICamera() {} // 인터페이스도 기반 클래스 이므로 
+						  // 가상 소멸자 사용.
 };
+//============================================
+// 강한 결합(tightly coupling) vs 약한 결합(loosely coupling)
+// 
+// People의 UseCamera(Camera* p) : 강한 결합
+//								   Camera 만 사용가능
+//								   교체 불가능한 경직된 디자인
+
+// People의 UseCamera(ICamera* p) : 약한 결합(loosely coupling)
+//								   교체 가능한 유연한 디자인
+//								   규칙(ICamera)를 지킨
+//									모든 카메라 사용가능
+
+
+
+
+
+
+
 
 
 
