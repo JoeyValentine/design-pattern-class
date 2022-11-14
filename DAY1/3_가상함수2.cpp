@@ -12,13 +12,19 @@
 class Base
 {
 public:
-	virtual ~Base() {}
+	virtual ~Base() { std::cout << "~Base" << std::endl; }
 };
 class Derived : public Base
 {
 public:
 	Derived()  { std::cout << "Derived() 자원할당" << std::endl; }
 	~Derived() { std::cout << "~Derived() 자원해지" << std::endl; }
+};
+class Derived2: public Derived
+{
+public:
+	Derived2() { std::cout << "Derived2() 자원할당" << std::endl; }
+	~Derived2() { std::cout << "~Derived2() 자원해지" << std::endl; }
 };
 int main()
 {
@@ -28,7 +34,7 @@ int main()
 //	delete p;  // 이순간 객체가 파괴 되므로 소멸자 호출
 
 
-	Base* p = new Derived; // 생성자 호출
+	Base* p = new Derived2; // 생성자 호출
 
 	delete p; // 이순간 소멸자를 호출해야 하는데
 			  // 컴파일 할때 호출을 결정할지, 실행할때 할지 정해야합니다.
