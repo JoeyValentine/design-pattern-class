@@ -36,9 +36,9 @@ public:
 		{
 			char c = _getch();
 
-			if (c == 13) break;	
+			if (c == 13 && (pval == nullptr || pval->iscomplete(data)) ) break;
 
-			if ( pval->validate(data, c) )
+			if ( pval == nullptr || pval->validate(data, c) )
 			{
 				data.push_back(c);
 
