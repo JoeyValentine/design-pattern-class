@@ -17,7 +17,7 @@ public:
 		{
 			char c = _getch();// 한자만 입력(화면 출력 안됨)
 
-			if (c == 13) break;
+			if (c == 13) break;	// enter
 
 			if (isdigit(c))
 			{
@@ -25,6 +25,7 @@ public:
 				std::cout << c;
 			}
 		}
+
 		std::cout << "\n";
 		return data;
 	}
