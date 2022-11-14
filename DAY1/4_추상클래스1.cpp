@@ -22,3 +22,12 @@ int main()
 	Shape* p; // ok.    포인터 변수는 만들수 있다.
 	Rect  r;  // ok!
 }
+
+// java, C# : abstract 키워드가 있습니다.
+/*
+abstract class Shape
+{
+public:
+	abstract void Draw();
+};
+*/
