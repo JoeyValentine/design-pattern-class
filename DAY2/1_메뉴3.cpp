@@ -33,19 +33,32 @@ public:
 	// 핵심 : 팝업메뉴를 선택할때 호출되는 함수
 	void command()
 	{
-		int sz = v.size();
-
-		for (int i = 0; i < sz; i++)
+		while (1)
 		{
-			std::cout << i + 1 << ". " << v[i]->get_title() << std::endl;
+			system("cls"); // 화면 지우기
+
+			int sz = v.size();
+			for (int i = 0; i < sz; i++)
+			{
+				std::cout << i + 1 << ". " << v[i]->get_title() << std::endl;
+			}
+			std::cout << sz + 1 << ". 종료" << std::endl;
+
+			std::cout << "메뉴를 선택하세요 >> ";
+
+			int cmd;
+			std::cin >> cmd;
+
+
+			if (cmd == sz + 1) // 종료 메뉴 선택
+				break;	// 또는 return
+
+			if (cmd < 1 || cmd > sz + 1) // 잘못된 입력
+				continue; // 다시 입력 받으면 됩니다.
+
+			v[cmd - 1]->command(); // 선택된 메뉴 실행
 		}
-		std::cout << sz + 1 << ". 종료" << std::endl;
-		std::cout << "메뉴를 선택하세요 >> ";
 
-		int cmd;
-		std::cin >> cmd;
-
-		v[cmd - 1]->command(); // 선택된 메뉴 실행
 	}
 
 };
