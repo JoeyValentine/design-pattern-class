@@ -15,7 +15,13 @@ public:
 	virtual ~BaseMenu() {}
 
 	std::string get_title() { return title; }
+
+	// 모든 메뉴는 선택될수 있다.
+	// 기반 클래스에도 "command()" 가 필요하다.
+	virtual void command() = 0;
 };
+
+
 
 class MenuItem : public BaseMenu
 {
@@ -24,7 +30,7 @@ public:
 	MenuItem(const std::string& title, int id)
 		: BaseMenu(title), id(id) {}
 
-	void command()
+	virtual void command() override
 	{
 		std::cout << get_title() << " 메뉴 선택됨" << std::endl;
 		_getch();
@@ -39,7 +45,7 @@ public:
 
 	void add_menu(BaseMenu* p) { v.push_back(p); }
 
-	void command()
+	virtual void command() override
 	{
 		while (1)
 		{
@@ -63,7 +69,9 @@ public:
 			if (cmd < 1 || cmd > sz + 1) 
 				continue; 
 
-			v[cmd - 1]->command(); 
+			v[cmd - 1]->command(); // v[cmd-1] 이 어떤 종류의
+								// 메뉴인자 조사할 필요 없다.
+								// "다형성"
 		}
 
 	}
