@@ -16,14 +16,13 @@ public:
 
 	std::string get_title() { return title; }
 
+	// 메뉴 선택시 호출되는 함수!
 	void command()
 	{
-		std::cout << get_title() << "메뉴 선택됨" << std::endl;
+		std::cout << get_title() << " 메뉴 선택됨" << std::endl;
 		_getch(); // 아무키나 누를때 까지 대기
 	}
 };
-
-
 int main()
 {
 	// 각각의 메뉴 항목을 모두 객체로 취급
