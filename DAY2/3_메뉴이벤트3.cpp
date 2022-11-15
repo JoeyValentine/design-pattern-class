@@ -82,16 +82,25 @@ class MenuItem : public BaseMenu
 {
 	int id;
 
-	IMenuListener* plistener = nullptr;
+//	IMenuListener* plistener = nullptr;
+	std::vector<IMenuListener*> v;
 public:
-	void set_listener(IMenuListener* p) { plistener = p; }
+//	void set_listener(IMenuListener* p) { plistener = p; }
+	void add_listener(IMenuListener* p) { v.push_back(p); }
 
-	MenuItem(const std::string& title, int id) : BaseMenu(title), id(id) {}
+	MenuItem(const std::string& title, int id, 
+			IMenuListener* p = nullptr ) : BaseMenu(title), id(id) 
+	{
+		if (p != nullptr)
+			v.push_back(p);
+	}
 
 	virtual void command() override
 	{
-		if (plistener != nullptr)
-			plistener->do_command();
+//		if (plistener != nullptr) plistener->do_command();
+
+		for (auto p : v)
+			p->do_command();
 	}
 };
 
