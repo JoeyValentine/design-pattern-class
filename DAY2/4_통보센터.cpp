@@ -43,6 +43,11 @@ int main()
 	nc.postNotificationWithName("LOWBATTERY", (void*)30);
 }
 
-
+// 중재자(Mediator) 패턴
+// => 여러개의 객체가 존재하고,
+// => 객체간의 상호 관계가 복잡하면
+// => 중재자를 사용해라
+// => 객체간의 M:N 의 관계를 
+// => 객체와 중재자간의 N:1의 관계로 변경하는 패턴
 
 
