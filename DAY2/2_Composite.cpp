@@ -12,24 +12,43 @@ class Item
 	std::string name; 
 public:
 	Item(const std::string& name) : name(name) {}
-
+	virtual ~Item() {}
 
 	// 2. File, Folder 모두 크기를 구할수 있습니다.
 	virtual int getSize() = 0;
 };
 
-
-
-
-class File  
+class File : public Item
 {
+	int size;
 public:
+	File(const std::string& name, int size)
+		: Item(name), size(size) {}
+
+	virtual int getSize() override { return size; }
 };
 
-class Folder 
+class Folder : public Item
 {
+	std::vector<Item*> v;
 public:
+	Folder(const std::string& name) 
+		: Item(name) {}
+
+	void addItem(Item* p) { v.push_back(p); }
+
+	virtual int getSize() override 
+	{
+		int size = 0;
+
+		for (auto p : v)
+			size += p->getSize();
+
+		return size;
+	}
 };
+
+
 
 int main()
 {
@@ -48,8 +67,8 @@ int main()
 
 	// 파일은 자신만의 크기는 있습니다.
 	// 폴더는 자신만의 크기는 없지만 크기를 구할수 있습니다.
-	cout << f2->getSize() << endl; // 20
-	cout << fo1->getSize() << endl; // 10
-	cout << root->getSize() << endl; // 30
+	std::cout << f2->getSize() <<   std::endl; // 20
+	std::cout << fo1->getSize() <<  std::endl; // 10
+	std::cout << root->getSize() << std::endl; // 30
 }
 
