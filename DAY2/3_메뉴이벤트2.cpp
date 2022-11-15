@@ -90,6 +90,11 @@ public:
 class HDMenu : public MenuItem
 {
 public:
+	// 컴파일러가 생성한 디폴트 생성자.
+	// HDMenu() : MenuItem() {}
+	HDMenu(const std::string& title, int id) : MenuItem(title, id) {}
+
+
 	virtual void do_command() override
 	{
 		std::cout << "HD 로 해상도 변경" << std::endl;
@@ -99,14 +104,21 @@ public:
 class FHDMenu : public MenuItem
 {
 public:
+	using MenuItem::MenuItem; // 생성자를 상속해 달라는 문법
+							  // C++11 에서 추가된 문법
+
 	virtual void do_command() override
 	{
 		std::cout << "FHD 로 해상도 변경" << std::endl;
 	}
 };
+
+
 class UHDMenu : public MenuItem
 {
 public:
+	using MenuItem::MenuItem;
+
 	virtual void do_command() override
 	{
 		std::cout << "UHD 로 해상도 변경" << std::endl;
