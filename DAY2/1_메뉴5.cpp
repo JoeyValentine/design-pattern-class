@@ -82,13 +82,13 @@ int main()
 	root->add_menu(pm1);
 	root->add_menu(pm2);
 
-	pm1->add_menu(new MenuIem("HD", 11));
-	pm1->add_menu(new MenuIem("FHD", 12));
-	pm1->add_menu(new MenuIem("UHD", 13));
+	pm1->add_menu(new MenuItem("HD", 11));
+	pm1->add_menu(new MenuItem("FHD", 12));
+	pm1->add_menu(new MenuItem("UHD", 13));
 
-	pm2->add_menu(new MenuIem("RED",   21));
-	pm2->add_menu(new MenuIem("GREEN", 22));
-	pm2->add_menu(new MenuIem("BLUE",  23));
+	pm2->add_menu(new MenuItem("RED",   21));
+	pm2->add_menu(new MenuItem("GREEN", 22));
+	pm2->add_menu(new MenuItem("BLUE",  23));
 
 	// 이제 시작하려면 어떻게 해야 할까요 ??
 	root->command();
