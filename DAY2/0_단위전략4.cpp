@@ -1,9 +1,24 @@
 #include <iostream>
+
 // 방법 3. 단위전략(policy base design)
 // => 클래스가 사용하는 정책을 담은 정책 클래스를 템플릿 인자로 교체하는 기술
 // => C++ 진영에서 가장 유명한 기법!!!!
 
-template<typename T, typename ThreadModel > class List
+
+// 클래스가 사용하는 정책(알고리즘, 전략)을 교체하는 2가지 기술
+
+// 인터페이스를 설계해서 교체 : 실행시간 교체 가능 ( st.set_sync(&다른정책) )
+//						    가상함수를 사용하게 된다. 함수호출의 오버헤드존재
+//						    지켜야하는 규칙을 "인터페이스(ISync)"로 설계
+//							"strategy 패턴" - 대부분의 객체지향 언어지원
+
+
+// 템플릿 인자로 교체       : 실행시간 교체 안됨.
+//							대부분 인라인 함수 사용. 함수 호출의 오버헤드 없음
+//							지켜야 하는 규칙은 "문서화" 해야 한다.
+//							"policy base design" - C++언어의 대표적인 기술
+
+template<typename T, typename ThreadModel = NoLock > class List
 {
 	ThreadModel tm;
 public:
@@ -31,7 +46,9 @@ public:
 	inline void unlock() { std::cout << "mutex unlock" << std::endl; }
 };
 //==========================================
-List<int, NoLock> st;
+//List<int, NoLock> st;
+//List<int> st; // ok.. NoLock 사용.
+List<int, MutexLock> st;
 
 int main()
 {
