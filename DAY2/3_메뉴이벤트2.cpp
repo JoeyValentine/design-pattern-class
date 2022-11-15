@@ -98,6 +98,7 @@ public:
 	virtual void do_command() override
 	{
 		std::cout << "HD 로 해상도 변경" << std::endl;
+		_getch();
 	}
 };
 
@@ -110,6 +111,7 @@ public:
 	virtual void do_command() override
 	{
 		std::cout << "FHD 로 해상도 변경" << std::endl;
+		_getch();
 	}
 };
 
@@ -122,6 +124,7 @@ public:
 	virtual void do_command() override
 	{
 		std::cout << "UHD 로 해상도 변경" << std::endl;
+		_getch();
 	}
 };
 
