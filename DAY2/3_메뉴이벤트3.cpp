@@ -103,20 +103,33 @@ public:
 			p->do_command();
 	}
 };
+//=============================
+class Camera : public IMenuListener
+{
+public:
+	void start()
+	{
+		// 카메라가 사용하는 메뉴 구축
+		PopupMenu* root = new PopupMenu("ROOT");
+		root->add_menu(new MenuItem("HD", 11, this));
+		root->add_menu(new MenuItem("FHD", 12, this));
+		root->add_menu(new MenuItem("UHD", 13, this));
 
-
-
-
+		root->command();
+	}
+	// 메뉴를 처리하기위해 약속된 함수를 만듭니다.
+	virtual void do_command() override
+	{
+		std::cout << "camera 메뉴 처리" << std::endl;
+		_getch();
+	}
+};
 
 int main()
 {
-	PopupMenu* root = new PopupMenu("ROOT");
+	Camera cam;
+	cam.start();
 
-	root->add_menu(new MenuItem("HD", 11));
-	root->add_menu(new MenuItem("FHD", 12));
-	root->add_menu(new MenuItem("UHD", 13));
-
-	root->command();
 }
 
 
