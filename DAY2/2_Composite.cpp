@@ -6,10 +6,26 @@
 // => 공통의 기반 클래스이름은 Item 으로 하세요
 // => 결국 PopupMenu, MenuItem 구조와 동일해 집니다.
 
+class Item
+{
+	// 1. File, Folder 모두 이름이 있습니다.
+	std::string name; 
+public:
+	Item(const std::string& name) : name(name) {}
+
+
+	// 2. File, Folder 모두 크기를 구할수 있습니다.
+	virtual int getSize() = 0;
+};
+
+
+
+
 class File  
 {
 public:
 };
+
 class Folder 
 {
 public:
