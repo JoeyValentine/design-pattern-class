@@ -75,9 +75,11 @@ public:
 //       구현해야 한다.
 struct IMenuListener
 {
-	virtual void do_command() = 0;
+	virtual void do_command(int id) = 0;
 	virtual ~IMenuListener() {}
 };
+
+
 class MenuItem : public BaseMenu
 {
 	int id;
@@ -100,7 +102,7 @@ public:
 //		if (plistener != nullptr) plistener->do_command();
 
 		for (auto p : v)
-			p->do_command();
+			p->do_command(id);
 	}
 };
 //=============================
@@ -118,9 +120,14 @@ public:
 		root->command();
 	}
 	// 메뉴를 처리하기위해 약속된 함수를 만듭니다.
-	virtual void do_command() override
+	virtual void do_command(int id) override
 	{
-		std::cout << "camera 메뉴 처리" << std::endl;
+		switch (id)
+		{
+		case 11: std::cout << "Camera HD" << std::endl; break;
+		case 12: std::cout << "Camera FHD" << std::endl; break;
+		case 13: std::cout << "Camera UHD" << std::endl; break;
+		}
 		_getch();
 	}
 };
