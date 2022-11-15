@@ -94,8 +94,8 @@ public:
 	}
 };
 //--------------------------------------
-void f0()      { printf("f0");         _getch(); }
-void f1(int n) { printf("f1 %d\n", n); _getch(); }
+void f0()      { printf("f0\n");         }
+void f1(int n) { printf("f1 %d\n", n); }
 
 class Dialog
 {
@@ -108,13 +108,30 @@ public:
 
 int main()
 {
-	PopupMenu* root = new PopupMenu("ROOT");
+	// 1. 메뉴 이벤트처리 함수의 기본 모양은 "인자가 없는 함수" 입니다.
 
-	MenuItem* m1 = new MenuItem("HD", 11, f0); 
-	
-	MenuItem* m2 = new MenuItem("FHD", 12);
+	// 2. MenuItem 만들때 생성자 3번째 인자로 함수등록 가능합니다.
+	// => "f0" 는 인자가 0개 이므로 그냥 주소만 등록하면 됩니다.
+	MenuItem* m1 = new MenuItem("HD",  11); 	
+	MenuItem* m2 = new MenuItem("FHD", 12, &f0 );
 
-	root->command();
+	// 3. add_handler 로 등록해도 됩니다.
+	m1->add_handler(&f0);
+
+	// 4. 2개 메뉴에 같은 함수 등록하려면 "인자가 한개인 함수 만들어서"
+	//    std::bind 할때 메뉴 ID 고정하세요
+	m1->add_handler( std::bind(&f1, 11) ); // ID(11)로 고정
+	m2->add_handler( std::bind(&f1, 12) );
+
+	// 5. 람다표현식등 모든 함수 등록 가능합니다.
+	m1->add_handler([]() {std::cout << "lambda" << std::endl; });
+
+	// 6. 멤버 함수를 등록할때는 객체 주소도 bind 하세요
+	Dialog dlg;
+	m1->add_handler(std::bind(&Dialog::close, &dlg, 0, 0));
+								// dlg.close(0,0) 호출됨.
+
+	m1->command(); // 등록된 모든 함수 호출됩니다.
 }
 
 
