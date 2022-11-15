@@ -1,6 +1,7 @@
 // 3_메뉴이벤트5
 #include <iostream>
 #include <functional>
+using namespace std::placeholders; // _1, _2, _3....
 
 void foo(int a, int b, int c, int d)
 {
@@ -20,6 +21,10 @@ int main()
 	std::bind(&foo, 1, 2, 3, 4)(); // 4항함수 => 0항 함수로!
 	//<---- 결과가 다시 함수 --->|
 
-	std::bind(&foo, 5, _1, 9, _2)(7, 3); 
+	std::bind(&foo, 5, _1, 9, _2)(7, 3); // foo(5,7,9,3)
+								// 즉, 4항 => 2항 함수로 변경
+
+
+	std::bind(&foo, ? , ? , ? , ? )(7, 9, 2); // foo(9, 8, 2, 7)
 
 }
