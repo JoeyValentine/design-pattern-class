@@ -69,10 +69,15 @@ public:
 
 int main()
 {
+	// 객체지향 언어에서 프로그램이란 ?
+	// => 객체를 생성하고, 
+	// => 객체간의 관계를 설정하고, 
+	// => 객체간의 메세지를 주고 받는 것이다.(멤버 함수를 호출한다는 의미)
+
 	// 아래 코드를 보고 메뉴의 구조를 생각해 보세요
 	PopupMenu* root = new PopupMenu("ROOT");
-	PopupMenu* pm1 = new PopupMenu("해상도 변경");
-	PopupMenu* pm2 = new PopupMenu("색상 변경");
+	PopupMenu* pm1  = new PopupMenu("해상도 변경");
+	PopupMenu* pm2  = new PopupMenu("색상 변경");
 
 	root->add_menu(pm1);
 	root->add_menu(pm2);
@@ -86,6 +91,7 @@ int main()
 	pm2->add_menu(new MenuIem("BLUE",  23));
 
 	// 이제 시작하려면 어떻게 해야 할까요 ??
+	root->command();
 
 }
 
