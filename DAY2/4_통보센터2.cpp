@@ -49,6 +49,15 @@ int main()
 	nc.addObserver("LOWBATTERY", std::bind(&goo, _1, 0));
 
 	nc.postNotificationWithName("LOWBATTERY", (void*)30);
+
+
+	// 도전 과제
+	// poco 라는 C++ 네트워크 라이브러리에도 통보센터 유사 개념이 있습니다.
+	// 우선순위와 스레드개념이 있습니다.
+	// 우리 코드에 추가해 보세요
+	nc.addObserver("LOWBATTERY", &f1, 1); // 3번재 인자가 우선순위
+											// 클수록 높은 우선순위
+	nc.addObserver("LOWBATTERY", &f2, 2, NEWTHREAD);
 }
 
 
