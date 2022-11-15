@@ -90,12 +90,22 @@ public:
 //======================
 void foo() { std::cout << "foo" << std::endl; }
 
+class Camera
+{
+public:
+	void close() {}
+};
 
 int main()
 {
 	MenuItem m("HD", 11);
 	m.set_handler(&foo);
-	m.command();
+	m.set_handler(&Camera::close); // 멤버 함수 등록???
+									// error.
+									// 일반 함수 포인터에는 
+									// 멤버 함수를 담을수 없다!!
+	m.command();	// 메뉴 선택. 
+					// 등록된 핸들러 함수(foo) 호출
 }
 
 
