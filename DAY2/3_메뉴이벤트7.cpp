@@ -75,12 +75,34 @@ public:
 class MenuItem : public BaseMenu
 {
 	int id;
+	using HANDLER = std::function<void()>;
+
+	std::vector< HANDLER > v;
 public:
-	MenuItem(const std::string& title, int id) : BaseMenu(title), id(id) {}
+	MenuItem(const std::string& title, int id, HANDLER h = nullptr) 
+		: BaseMenu(title), id(id) 
+	{
+		if (h != nullptr)
+			v.push_back(h);
+	}
+	void add_handler(HANDLER h) { v.push_back(h); }
 
 	virtual void command() override
 	{
-	
+		for (auto f : v)
+			f();
+	}
+};
+//--------------------------------------
+void f0()      { printf("f0");         _getch(); }
+void f1(int n) { printf("f1 %d\n", n); _getch(); }
+
+class Dialog
+{
+public:
+	void close(int a, int b)
+	{
+		std::cout << "Dialog close" << std::endl;
 	}
 };
 
@@ -88,9 +110,9 @@ int main()
 {
 	PopupMenu* root = new PopupMenu("ROOT");
 
-	root->add_menu(new MenuItem("HD", 11));
-	root->add_menu(new MenuItem("FHD", 12));
-	root->add_menu(new MenuItem("UHD", 13));
+	MenuItem* m1 = new MenuItem("HD", 11, f0); 
+	
+	MenuItem* m2 = new MenuItem("FHD", 12);
 
 	root->command();
 }
