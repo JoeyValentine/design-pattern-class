@@ -71,13 +71,13 @@ class MenuItem : public BaseMenu
 {
 	int id;
 public:
-	MenuItem(const std::string& title, int id)
-		: BaseMenu(title), id(id) {}
+	MenuItem(const std::string& title, int id) 	: BaseMenu(title), id(id) {}
 
 	virtual void command() override
 	{
-		std::cout << get_title() << " 메뉴 선택됨" << std::endl;
-		_getch();
+		// 메뉴 아이템 선택시 해야할 일을 여기서 수행하면
+		// 모든 메뉴가 동일한 일을 하게 됩니다.
+		// 메뉴 아이템에 따라서 다른 일을 해야 합니다.
 	}
 };
 
