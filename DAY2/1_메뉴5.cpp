@@ -4,6 +4,28 @@
 #include <conio.h> 
 
 
+// Menu 예제 핵심 정리
+
+// 복합객체(PopupMenu) 는 개별객체(MenuItem) 뿐 아니라
+// 복합객체 자신도 보관할수 있다.
+// => 재귀적인 포함 관계
+// => 복합객체와 개별객체는 동일한 기반 클래스가 있어야 한다.
+
+// 복합객체와 개별객체는 사용법이 동일하다.
+// => 모두 선택되면 command() 호출
+// => command() 는 기반 클래스(BaseMenu) 에 있어야 한다.
+
+
+// 객체의 포함 관계는 "tree 구조"로 구성된다.
+
+// 메뉴 예제 뿐 아니라 다양한 예제에서 
+// 위와 같은 구조를 사용
+
+// "Composite 패턴"
+
+
+
+
 class BaseMenu
 {
 	std::string title;
@@ -81,10 +103,12 @@ int main()
 
 	root->add_menu(pm1);
 	root->add_menu(pm2);
+//	pm1->add_menu(pm2);
 
 	pm1->add_menu(new MenuItem("HD", 11));
 	pm1->add_menu(new MenuItem("FHD", 12));
 	pm1->add_menu(new MenuItem("UHD", 13));
+	pm1->add_menu(new MenuItem("8K", 14));
 
 	pm2->add_menu(new MenuItem("RED",   21));
 	pm2->add_menu(new MenuItem("GREEN", 22));
