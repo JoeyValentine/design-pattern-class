@@ -70,6 +70,17 @@ public:
 // 방법 3. MenuItem 안에 "객체 주소가 아닌 함수 주소"를 보관
 // => 함수 포인터를 사용한 이벤트 처림
 
+// C 함수 포인터의 문제점
+// => 멤버 함수의 주소를 보관할수 없다.
+
+// 필요한것, 다양한 클래스의 다양한 종류의 함수 주소를 보관할수 있는 도구가 필요하다.
+// C#         : delegate
+// SWIFT(IOS) : Selector
+// java       : 1.8 부터 함수 포인터 사용가능!!
+
+// C++ : C++11 의 std::bind 와 std::function !!
+
+
 class MenuItem : public BaseMenu
 {
 	int id;
@@ -100,7 +111,7 @@ int main()
 {
 	MenuItem m("HD", 11);
 	m.set_handler(&foo);
-	m.set_handler(&Camera::close); // 멤버 함수 등록???
+//	m.set_handler(&Camera::close); // 멤버 함수 등록???
 									// error.
 									// 일반 함수 포인터에는 
 									// 멤버 함수를 담을수 없다!!
