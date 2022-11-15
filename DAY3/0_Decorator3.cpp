@@ -1,17 +1,26 @@
-// Decorator - 65 page
 #include <iostream>
 
-class SpaceShip // 우주 비행선
+// 우주선과 우주선에 기능을 추가하는 객체(Decorator)는 공통의 
+// 기반 클래스가 있어야 한다.
+struct Item
+{
+	virtual void Fire() = 0;
+	virtual ~Item() {}
+};
+//========================================
+
+
+class SpaceShip : public Item
 {
 public:
 	void Fire() { std::cout << "Fire Missile" << std::endl; }
 };
 
-class LeftMissile
+class LeftMissile : public Item
 {
-	SpaceShip* ship;
+	Item* ship;
 public:
-	LeftMissile(SpaceShip* s) : ship(s) {}
+	LeftMissile(Item* s) : ship(s) {}
 
 	void Fire()
 	{
@@ -20,11 +29,11 @@ public:
 	}
 };
 
-class RightMissile
+class RightMissile : public Item
 {
-	SpaceShip* ship;
+	Item* ship;
 public:
-	RightMissile(SpaceShip* s) : ship(s) {}
+	RightMissile(Item* s) : ship(s) {}
 
 	void Fire()
 	{
@@ -42,6 +51,6 @@ int main()
 	LeftMissile lm(&ss);	
 	lm.Fire();
 
-	RightMissile rm(&ss);
+	RightMissile rm(&lm);
 	rm.Fire();
 }
