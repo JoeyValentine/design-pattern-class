@@ -23,6 +23,14 @@ public:
 		for (auto f : notif_map[key])
 			f(hint);
 	}
+
+	// 오직 한개만 존재하는 통보 센터도 생각해봅시다.
+	// "global 통보센터"라는 이름을 사용해 봅시다.
+	static NotificationCenter& defaultCenter()
+	{
+		static NotificationCenter instance;
+		return instance;
+	}
 };
 
 void foo(void* p) { std::cout << "foo : " << std::endl; }
@@ -31,7 +39,11 @@ void goo(void* p, int a) { std::cout << "goo : " << std::endl; }
 
 int main()
 {
-	NotificationCenter nc;
+	// local 통보 센터
+//	NotificationCenter nc;
+
+	// gloabl 통보 센터
+	NotificationCenter& nc = NotificationCenter::defaultCenter();
 
 	nc.addObserver("LOWBATTERY", &foo);
 	nc.addObserver("LOWBATTERY", std::bind(&goo, _1, 0));
