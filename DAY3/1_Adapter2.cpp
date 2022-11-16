@@ -48,9 +48,12 @@ int main()
 {
 	std::vector<Shape*> v;
 
-	Shape* p = new Text("hello");     // ok
+	TextView tv("hello"); // TextView : 클래스 입니다.
+						  // tv		  : 객체 입니다.
 
-	v.push_back(p);
+	// 이미 존재하는 객체 "tv" 를 v에 넣고 싶습니다.
+
+	v.push_back( &tv ); // error!!. Shape로 부터 파생되지 않았습니다.
 }
 
 
