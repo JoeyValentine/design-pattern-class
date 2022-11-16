@@ -105,3 +105,15 @@ int main()
 // adapter : 인터페이스의 변경(Write() => WriteFormat())
 //			 동일한 인터페이스를 사용하면서 기능추가가 아니라!!!
 //			 인터페이스가 변경되는것 또는 변경되면서 기능추가
+
+
+// C# 언어의 입출력 스트림
+// 저장소					StreamDecorator 들		StreamAdapter
+// 
+// FileStream			EncryptStream			StreamReader
+// NetworkStream		GZipStream				StreamWriter
+// PipeStream			XmlStream
+// MemoryStream			HtmlStream	
+
+// [실제 데이타저장]		[저장소와 동일 함수사용]	[사용하기 쉬운함수로변경]
+//						기능만 추가
