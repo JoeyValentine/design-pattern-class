@@ -13,6 +13,10 @@
 
 // 아래 클래스는 결국 list 의 멤버 함수 이름을 stack 처럼 보이도록
 // 변경한것 입니다.
+// 방법 1. public 상속을 사용한 stack
+// => list 의 모든 기능도 사용자가 사용할수 있게 된다. 
+// => 좋지않은 설계
+// => java 의 stack 은 Vector 에서 상속됩니다.!!
 template<typename T> class stack : public std::list<T>
 {
 public:
@@ -25,4 +29,9 @@ int main()
 {
 	stack<int> s;
 	s.push(10);
+
+	s.push_front(30); // stack 자체의 멤버 함수는 아니지만
+					  // list로 부터 물려 받은 멤버 함수
+					  // stack 은 한쪽으로만 사용해야 하는데!!!
+						// => 앞으로 접근했으므로 스택이 잘못되었다.
 }
