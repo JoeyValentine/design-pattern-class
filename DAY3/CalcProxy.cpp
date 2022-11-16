@@ -1,17 +1,20 @@
 #define USING_GUI
+#include <atomic>
 #include "cppmaster.h"
 #include "ICalc.h"
-
 
 class Calc : public ICalc
 {
 	int server;
-	int refcnt = 0;	// 몇개의 포인터가 현재 객체를 사용하는지 관리
+//	int refcnt = 0;	// 몇개의 포인터가 현재 객체를 사용하는지 관리
 					// "reference counting" 이라는 불리는 기술
+
+	std::atomic<int> refcnt = 0; // 멀티스레드 안전하게!
 public:
 	Calc() { server = ec_find_server("Calc"); }
 
 	~Calc() { std::cout << "~Calc" << std::endl; }
+
 
 	void AddRef() { ++refcnt; }
 
