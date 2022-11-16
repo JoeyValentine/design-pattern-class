@@ -37,7 +37,8 @@ int main()
 	// Calc* pCalc = new Calc;
 
 	// 교체 가능한 유연한 디자인이 되려면 약한 결합(인터페이스)를 사용해야합니다.
-	ICalc* pCalc = ? ? ;
+	ICalc* pCalc = new ICalc ; // error.
+								// 인터페이스를 객체생성할수는 없습니다.!
 
 	int n1 = pCalc->Add(10, 20);
 	int n2 = pCalc->Sub(10, 20);
