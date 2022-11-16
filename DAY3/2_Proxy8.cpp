@@ -43,8 +43,8 @@ ICalc* ReloadProxy()
 }
 int main()
 {
-	AutoPtr<ICalc> p1( ReloadProxy() ); 
-	AutoPtr<ICalc> p2 = p1;
+	AutoPtr<ICalc> p1( ReloadProxy() );	// 持失切 
+	AutoPtr<ICalc> p2 = p1;				// 差紫 持失切
 
 	int n1 = p1->Add(10, 20);
 	int n2 = p1->Sub(10, 20);
