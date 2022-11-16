@@ -18,9 +18,31 @@ public:
 		return w;
 	}
 };
+// Image 는 draw 할때만 load 되면 된다.
+// 크기 정보등을 얻을때는 그림 파일이 load될 필요 없다.
+
+// 지연된 생성(그릴때 메모리에 load)를 위한 Image 대행자, 
+// Proxy 클래스를 만들자
+class ImageProxy
+{
+	Image* img = nullptr;
+	std::string filename;
+public:
+	ImageProxy(const std::string& s) : filename(s) {}
+	int get_width() { return 20; } // 파일 헤더 분석해서 얻기
+
+	void draw()
+	{
+		if (img == nullptr)
+			img = new Image(filename);
+		img->draw();
+	}
+};
+
 int main()
 {
-	Image img("C:\\dog.png");
+//	Image img("C:\\dog.png");
+	ImageProxy img("C:\\dog.png");
 	int w = img.get_width();
-	img.draw();
+//	img.draw();
 }
