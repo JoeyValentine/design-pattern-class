@@ -17,10 +17,6 @@ public:
 
 //===========================================
 
-
-
-
-
 class Shape
 {
 public:
@@ -39,6 +35,22 @@ class Circle : public Shape
 public:
 	void draw() override { std::cout << "draw circle" << std::endl; }
 };
+
+// 도형편집기 시스템에 "문자열"도 추가하고 싶다.
+// => 예전 부터 사용하던 "TextView" 가 있다!!
+// => 도형편집기 시스템에서 "TextView" 를 사용할수 있을까 ??
+
+// TextView 를 도형편집기 시스템이 요구하는 인터페이스로 변경!!
+class Text : public Shape, public TextView
+{
+public:
+	Text(const std::string& s) : TextView(s) {}
+
+	void draw() { ? };
+};
+
+
+
 
 int main()
 {
