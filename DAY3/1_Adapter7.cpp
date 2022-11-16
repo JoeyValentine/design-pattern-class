@@ -52,6 +52,21 @@ public:
 	}
 };
 
+class StreamAdapter
+{
+	Stream* stream;
+public:
+	StreamAdapter(Stream* s) : stream(s) {}
+
+	// Write() => WriteFormat() 으로 인터페이스 변경
+	void WriteFormat(const std::string& s, ...)
+	{
+		// 가변인자로 받은 데이타를 문자열로 변경해서 s에 붙이세요
+		stream->Write(s);
+	}
+};
+
+
 
 int main()
 {
@@ -63,4 +78,23 @@ int main()
 
 	ZipDecorator zd(&ed);
 	zd.Write("hello");
+
+	//===============================
+	// Stream 에 쓰려면 "Write(문자열)" 형태로 사용해야 합니다.
+	fs.Write("hello");
+
+
+	// 그런데, 변수 값을 서식화된 문자열로 stream 에 쓰고 싶습니다.
+	int n = 10;
+//	fs.WriteFormat("n = %d, %f", n, 3.4);
+				// => FileStream 에 추가하면 OCP 위반이고!
+				// => 다른 Stream 에도 추가해야 합니다. 
+
+
+	// Write 함수를 WriteFormat 함수로 변경해주는 어답터
+	StreamAdapter sa(&fs);
+	sa.WriteFormat("n = % d, % f", n, 3.4);
+				// 1. 인자를 문자열로 변경해서
+				// 2. fs.Write()에 전달.
+
 }
