@@ -12,8 +12,8 @@ template<typename T> class stack : private std::list<T>
 {
 public:
 	void push(const T& a) { std::list<T>::push_back(a); }
-	void push()			  { std::list<T>::pop_back(); }
-	T& pop()			  { return std::list<T>::back(); }
+	void pop()			  { std::list<T>::pop_back(); }
+	T& top()			  { return std::list<T>::back(); }
 };
 
 int main()
