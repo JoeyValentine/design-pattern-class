@@ -94,7 +94,14 @@ int main()
 	// Write 함수를 WriteFormat 함수로 변경해주는 어답터
 	StreamAdapter sa(&fs);
 	sa.WriteFormat("n = % d, % f", n, 3.4);
-				// 1. 인자를 문자열로 변경해서
-				// 2. fs.Write()에 전달.
+				// 1. 인자를 문자열로 변경해서  <= 기능을 추가해서
+				// 2. fs.Write()에 전달.		<= 원래 기능사용하므로
+											// Decorator 아닌가요 ?
 
 }
+// Decorator : 객체에 동적인 기능 추가. "인터페이스(함수이름)을 동일"
+//			   Decorator 등도, FileStream 과 동일한 인터페이스(함수이름) 유지
+
+// adapter : 인터페이스의 변경(Write() => WriteFormat())
+//			 동일한 인터페이스를 사용하면서 기능추가가 아니라!!!
+//			 인터페이스가 변경되는것 또는 변경되면서 기능추가
