@@ -2,6 +2,15 @@
 
 // 싱글톤 : 오직 한개의 객체만 존재하는 것.
 //         프로그램의 어디에서도 동일한 방법으로 접근 가능한것
+// => 결국 "전역변수" 와 같습니다.
+// => "전역변수" 는 보통 나쁘다고 이야기 합니다.
+// => 멀티 스레드에 안전하지 않고, 함수를 독립적으로 분리하기도 어려워집니다.
+//========================================================
+
+// 방법 1. 오직한개의 객체가 "static 지역변수"로 만든 모델..
+// => "effective-c++" 의 저자인 "scott meyer" 가 처음 제안
+// => "meyer's singleton" 이라고 불리는 모델.
+
 
 class Cursor
 {
@@ -16,7 +25,6 @@ private:
 	Cursor(const Cursor&) = delete;
 	Cursor operator=(const Cursor&) = delete;				
 
-
 	// 규칙 3. 오직 한개의 객체를 만들어서 반환하는 static 멤버 함수
 public:
 	static Cursor& getInstance()
@@ -25,6 +33,7 @@ public:
 		return instance;
 	}
 };
+
 int main()
 {
 	Cursor& c1 = Cursor::getInstance();
