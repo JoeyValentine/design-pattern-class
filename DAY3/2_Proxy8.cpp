@@ -8,11 +8,19 @@ template<typename T> class AutoPtr
 {
 	T* obj;
 public:
-	AutoPtr(T* p = nullptr) : obj(p) {}
+	AutoPtr(T* p = nullptr) : obj(p) 
+	{
+		if (obj) obj->AddRef();
+	}
 
-	AutoPtr(const AutoPtr& ap) : obj(ap.obj) {}
-	~AutoPtr() { }
-
+	AutoPtr(const AutoPtr& ap) : obj(ap.obj) 
+	{
+		if (obj) obj->AddRef();
+	}
+	~AutoPtr() 
+	{
+		if (obj) obj->Release();
+	}
 	// 스마트 포인터는 객체지만 ->, * 연산자 재정의를 통해서
 	// 포인터 처럼 사용가능하게 합니다.
 	T* operator->() { return obj; }
@@ -33,7 +41,19 @@ ICalc* ReloadProxy()
 	ICalc* p = f(); // DLL 안에서 "new Calc"
 	return p;
 }
+int main()
+{
+	AutoPtr<ICalc> p1( ReloadProxy() ); 
+	AutoPtr<ICalc> p2 = p1;
 
+	int n1 = p1->Add(10, 20);
+	int n2 = p1->Sub(10, 20);
+
+	std::cout << n1 << ", " << n2 << std::endl;
+}
+
+
+/*
 int main()
 {
 	ICalc* p1 = ReloadProxy();
@@ -47,7 +67,7 @@ int main()
 	p1->Release(); 
 
 }
-
+*/
 
 
 
