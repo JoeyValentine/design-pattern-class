@@ -41,20 +41,27 @@ public:
 // => 도형편집기 시스템에서 "TextView" 를 사용할수 있을까 ??
 
 // TextView 를 도형편집기 시스템이 요구하는 인터페이스로 변경!!
+
+// Adapter 패턴 : 인터페이스의 불일치를 해결하는 패턴
+//				 기존 클래스의 인터페이스(함수이름)을 변경해서
+//				 요구조건에 맞게 변경해주는 클래스를 만드는 패턴
+
 class Text : public Shape, public TextView
 {
 public:
 	Text(const std::string& s) : TextView(s) {}
 
-	void draw() { ? };
+	void draw() { TextView::Show(); };
 };
-
-
-
 
 int main()
 {
 	std::vector<Shape*> v;
+
+//	Shape* p = new TextView("hello"); // error
+	Shape* p = new Text("hello");     // ok
+
+	v.push_back(p);
 }
 
 
