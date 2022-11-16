@@ -29,6 +29,9 @@ ICalc* Create()
 // 
 // cl CalcProxy.cpp /LD /link user32.lib gdi32.lib kernel32.lib
 
+// /LD : DLL 로 빌드 해달라.
+// 
+
 // D:      => D 드라이브 이동
 // cd 폴더  => 폴더로 이동
 // cd ..   => 상위 폴더이동.
