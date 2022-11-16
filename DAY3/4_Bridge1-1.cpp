@@ -1,6 +1,9 @@
 // 6_Bridge1 - 90 page
 #include <iostream>
 
+
+
+
 // 모든 "MP3 Player" 가 지켜야하는 규칙을 설계 한다.
 struct IMP3
 {
@@ -30,8 +33,18 @@ public:
 	// 추상 계층은 모든 기능을 구현 계층에 의존하게 됩니다.
 	void Play() { engine->Play(); }
 	void Stop() { engine->Stop(); }
+
+	// 구현부(IMP3) 를 변경하지 않고 추상 계층만 변경해서
+	// 새로운 서비스 제공!!
+	void PlayOneMinute()
+	{
+		engine->Play();
+		// 1분후..
+		engine->Stop();
+	}
 };
 //--------------------------------------------------
+// 이제 프로그램 내부에서 MP3가 필요하면 "추상계층인 MP3Player"만 사용합니다.
 class People
 {
 public:
@@ -54,3 +67,6 @@ int main()
 }
 
 
+// Bridge 패턴
+// => "구현(IMP3) 와 추상(MP3Player) 를 분리해서 상호 독립적인 update 가 
+//    가능하게 하는 패턴!
