@@ -13,10 +13,20 @@
 // => 서버와 Proxy 를 만들때 모두 아래 인터페이스를 구현해야 합니다.
 struct ICalc
 {
-	virtual void Add(int a, int b) = 0;
-	virtual void Sub(int a, int b) = 0;
+	virtual int Add(int a, int b) = 0;
+	virtual int Sub(int a, int b) = 0;
 	virtual ~ICalc() {}
 };
+
+// 이제 새로운 기능이 추가되려면
+// 1. 인터페이스에 함수 추가
+// 2. Proxy 에 함수 추가
+// 3. Stub 에 추가하고, 
+// 4. 서버에 실제 기능 추가하면 됩니다.
+
+// 위 1, 2, 3 을 자동으로 생성해주는 언어를 "IDL" 라고 합니다.
+// IDL : interface definition language
+
 
 class Calc : public ICalc
 {
