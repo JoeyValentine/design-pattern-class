@@ -70,5 +70,16 @@ int main()
 */
 
 
+// java, C# : garbage collector 사용
+//			=> 사용되지 않은 객체를 즉시 삭제 하지는 않음
+//			=> 메모리가 부족할때만 사용하지 않은 객체 제거
+//			=> 소멸자(finalizer) 의 호출시점이 명확하지 않음
 
+// python, swift : reference counting 사용
+//			=> 참조계수가 0이면 즉시 파괴
+//			=> 소멸자 호출이 명확함.
+
+// 파이썬
+//n1 = 10;
+//n2 = n1;
 
