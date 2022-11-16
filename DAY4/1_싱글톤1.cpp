@@ -16,7 +16,7 @@ class Cursor
 {
 	// 규칙 1. 생성자를 private !!
 private:
-	Cursor() {}
+	Cursor() { std::cout << "Cursor()" << std::endl; }
 
 	// 규칙 2. 컴파일러가 복사 생성자와 대입연산자를 만들지
 	//        않도록해야 한다.
@@ -29,6 +29,11 @@ private:
 public:
 	static Cursor& getInstance()
 	{
+		// static 지역변수
+		// 1. 메모리 할당은 컴파일 할때 실행 파일에 .data 섹션에 
+		//    할당, 즉, 메모리는 프로세스 실행시 할당
+		// 2. 생성자 호출은 이 함수가 처음 호출될때 실행
+
 		static Cursor instance;
 		return instance;
 	}
@@ -36,10 +41,11 @@ public:
 
 int main()
 {
-	Cursor& c1 = Cursor::getInstance();
-	Cursor& c2 = Cursor::getInstance();
+	std::cout << "-----------" << std::endl;
+//	Cursor& c1 = Cursor::getInstance();
+//	Cursor& c2 = Cursor::getInstance();
 
-	std::cout << &c1 << ", " << &c2 << std::endl;
+//	std::cout << &c1 << ", " << &c2 << std::endl;
 
 //	Cursor c3 = c1; // 복사 생성자 사용 하는것도 막아야 한다.
 
