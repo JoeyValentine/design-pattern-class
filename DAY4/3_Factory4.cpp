@@ -74,6 +74,14 @@ AutoRegister Rect::ar(1, &Rect::Create);
 // new Rect()	=> Rect 생성자 호출
 // new Rect()   => Rect 생성자 호출
 
+// C#
+/*
+class Rect
+{
+	static Rect() {} // static 생성자, Rect 에 대해서 최초 1회 호출
+	Rect() {}		 // instance 생성자, 객체 생성시 마다 호출
+};
+*/
 
 
 
@@ -85,13 +93,10 @@ public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
 
 	static Shape* Create() { return new Circle; }
+
+	static AutoRegister ar;
 };
-
-
-
-
-
-
+AutoRegister Circle::ar(2, &Circle::Create);
 
 
 int main()
@@ -99,13 +104,6 @@ int main()
 	std::vector<Shape*> v;
 
 	ShapeFactory& factory = ShapeFactory::getInstance();
-
-
-	
-	factory.Register(1, &Rect::Create);
-	factory.Register(2, &Circle::Create);
-
-
 
 
 	while (1)
