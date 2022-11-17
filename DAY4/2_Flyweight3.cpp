@@ -17,6 +17,8 @@ class Image
 public:
 	void Draw() { std::cout << "Draw " << image_url << std::endl; }
 
+	// ImageFactor 안에서 Image 의 private 멤버에 접근하려면
+	// 반드시 "friend" 관계로 등록되어야 합니다.
 	friend class ImageFactory;
 };
 
