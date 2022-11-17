@@ -10,12 +10,17 @@ class Shape
 public:
 	virtual void draw() = 0;
 	virtual ~Shape() {}
+
+	virtual Shape* clone() = 0;
 };
 
 class Rect : public Shape
 {
 public:
 	void draw() override { std::cout << "draw Rect" << std::endl; }
+
+	virtual Rect* clone() override { return new Rect(*this); }
+
 
 	static Shape* Create() { return new Rect; }
 };
@@ -25,6 +30,8 @@ class Circle : public Shape
 {
 public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
+
+	virtual Circle* clone() override { return new Circle(*this); }
 
 	static Shape* Create() { return new Circle; }
 };
@@ -36,23 +43,20 @@ class ShapeFactory
 {
 	MAKE_SINGLETON(ShapeFactory)
 
-		typedef Shape* (*CREATOR)();// 함수 포인터 타입
-
-	std::map<int, CREATOR> create_map;
+	std::map<int, Shape*> prototype_map;
 
 public:
-	// 공장에 제품(정확히는 생성함수)을 등록하는 함수
-	void Register(int key, CREATOR f)
+	void Register(int key, Shape* prototype)
 	{
-		create_map[key] = f;
+		prototype_map[key] = prototype;
 	}
 
 	Shape* Create(int key)
 	{
 		Shape* p = nullptr;
 
-		if (create_map[key] != nullptr)
-			p = create_map[key]();
+		if (prototype_map[key] != nullptr)
+			p = prototype_map[key]->clone();
 
 		return p;
 	}
@@ -68,8 +72,19 @@ int main()
 
 
 	// 공장에 모든 제품을 등록합니다.
-	factory.Register(1, &Rect::Create);
-	factory.Register(2, &Circle::Create);
+	// => 공장에 "클래스" 등록
+//	factory.Register(1, &Rect::Create);
+//	factory.Register(2, &Circle::Create);
+
+	// 공장에 클래스가 아닌 자주 사용하는 "객체" 를 등록해 봅시다.
+	Rect* redRect = new Rect;
+	Rect* blueRect = new Rect;
+	Circle* blueCircle = new Circle;
+
+	// 공장에 견본품(prototype)을 등록
+	factory.Register(1, redRect);
+	factory.Register(2, blueRect);
+	factory.Register(3, blueCircle);
 
 
 
