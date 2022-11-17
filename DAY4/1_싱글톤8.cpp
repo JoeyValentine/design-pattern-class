@@ -46,6 +46,7 @@ int main()
 }
 
 // github.com/aosp-mirror     => 안드로이드 소스 코드 입니다.
+//								Android Open Source Project
 // 
 // platform system core 라는 레포지토리 선택하세요
 
