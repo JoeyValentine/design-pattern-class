@@ -40,7 +40,7 @@ public:
 class BarGraph : public IGraph
 {
 public:
-	virtual void updata(int data) override
+	virtual void update(int data) override
 	{
 		std::cout << "Bar Graph : ";
 			
@@ -57,7 +57,8 @@ int main()
 	BarGraph bg; table.attach(&bg);
 	table.edit();
 }
-
+// PieGraph 도 만들어서 붙여 보세요
+// => "PieGraph : ))))))))))))" 이렇게 표현해 보세요.
 
 
 
