@@ -34,18 +34,30 @@ public:
 		}
 	}
 };
+//=================
+// 관찰자들(Observer)
+// IGraph 인터페이스를 구현한 다양한 Chart class 를 제공하면 됩니다.
+class BarGraph : public IGraph
+{
+public:
+	virtual void updata(int data) override
+	{
+		std::cout << "Bar Graph : ";
+			
+		for (int i = 0; i < data; i++)
+			std::cout << "|";
+
+		std::cout << "\n";
+	}
+};
+
 int main()
 {
 	Table table;
+	BarGraph bg; table.attach(&bg);
 	table.edit();
 }
 
-
-
-
-int main()
-{
-}
 
 
 
