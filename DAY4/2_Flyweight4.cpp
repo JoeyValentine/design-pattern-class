@@ -10,10 +10,10 @@ int main()
 
 	//-----------------------
 
-	char sa1[] = "hello";
-	char sa2[] = "hello";
+	char sa1[] = "hello";	
+	char sa2[] = "hello";	// 객체지향 언어 "mutable string"
 
-	const char* sp1 = "hello";
+	const char* sp1 = "hello";	// "immutable string"
 	const char* sp2 = "hello";
 
 	printf("%p, %p\n", sp1, sp2);
