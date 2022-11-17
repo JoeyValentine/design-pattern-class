@@ -49,16 +49,37 @@ public:
 };
 
 
+class AddCircleCommand : public ICommand
+{
+	std::vector<Shape*>& v;
+public:
+	AddCircleCommand(std::vector<Shape*>& v) : v(v) {}
 
+	virtual void execute()  override { v.push_back(new Circle); }
+	virtual bool can_undo() override { return true; }
+	virtual void undo()     override
+	{
+		Shape* p = v.back();
+		v.pop_back();
 
+		delete p;
+	}
+};
 
+class DrawCommand : public ICommand
+{
+	std::vector<Shape*>& v;
+public:
+	DrawCommand(std::vector<Shape*>& v) : v(v) {}
 
-
-
-
-
-
-
+	virtual void execute()  override 
+	{
+		for (auto p : v)
+			p->draw();
+	}
+	virtual bool can_undo() override { return true; }
+	virtual void undo()     override { system("cls"); }
+};
 
 
 
@@ -71,20 +92,24 @@ int main()
 		int cmd;
 		std::cin >> cmd;
 
+		ICommand* pcmd;
+
 		if (cmd == 1)
 		{
-			v.push_back(new Rect);
+			pcmd = new AddRectCommand(v); // 사각형을 추가하는 일을
+										// 하는 명령객체를 생성해서
+			pcmd->execute();
 		}
+
 		else if (cmd == 2)
 		{
-			v.push_back(new Circle);
+			pcmd = new AddCircleCommand(v);
+			pcmd->execute();
 		}
 		else if (cmd == 9)
 		{
-			for (int i = 0; i < v.size(); i++)
-			{
-				v[i]->draw();
-			}
+			pcmd = new DrawCommand(v);
+			pcmd->execute();
 		}
 	}
 }
