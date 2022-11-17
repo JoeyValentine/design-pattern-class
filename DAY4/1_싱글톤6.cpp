@@ -44,6 +44,16 @@ public:
 			if (pinstance == nullptr)
 			{
 				pinstance = new Cursor;
+
+				// 위 한줄은 아래 3줄처럼 동작합니다.
+				// 1. 커서 메모리 할당 : temp = malloc(Cursor)
+				// 2. 커서 생성자 호출 : Cursor::Cursor()
+				// 3. pinstance = temp(할당된 메모리 주소).
+
+				// 그런데, 2, 3의 순서를 변경하면 임시변수를만들지
+				// 안하도 됩니다. 그래서 최적화 하면
+				// 1. 커서 메모리 할당 : pinstance = malloc(Cursor)
+				// 2. 커서 생성자 호출 : Cursor::Cursor()
 			}
 			
 			mtx.unlock();
