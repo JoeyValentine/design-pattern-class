@@ -20,6 +20,15 @@ class Circle : public Shape
 public:
 	void draw() override { std::cout << "draw Circle" << std::endl; }
 };
+//==============================
+// Command 패턴
+// => 메뉴 등을 선택시 해야하는 일을 객체로 설계 해서
+// => 명령의 저장/복구 등을 가능하게 한다.
+// => 명령을 함수의 인자등으로도 사용가능하다.
+
+// QT(C++) : Undo Manager
+// WPF(C#) : Command Binding 개념
+
 // undo/redo 기능을 넣어 봅시다.
 
 // 모든 명령의 인터페이스
