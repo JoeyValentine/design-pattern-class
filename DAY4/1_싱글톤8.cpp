@@ -28,11 +28,8 @@ public:
 		return *pinstance;
 	}
 };
-
 template<typename T> T* Singleton<T>::pinstance = nullptr;   // <<=== 4
 template<typename T> std::mutex Singleton<T>::mtx;
-
-
 
 
 // Mouse 클래스도 "Cursor 처럼 힙에 만드는 싱글톤 모델" 로 하고싶습니다
@@ -46,6 +43,10 @@ int main()
 {
 	Mouse& m1 = Mouse::getInstance();
 	Mouse& m2 = Mouse::getInstance();
-
 }
 
+// github.com/aosp-mirror     => 안드로이드 소스 코드 입니다.
+// 
+// platform system core 라는 레포지토리 선택하세요
+
+// libutils/include/utils/singleton.h 파일 확인해 보세요
