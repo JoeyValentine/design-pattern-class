@@ -51,10 +51,25 @@ public:
 	}
 };
 
+class PieGraph : public IGraph
+{
+public:
+	virtual void update(int data) override
+	{
+		std::cout << "Pie Graph : ";
+
+		for (int i = 0; i < data; i++)
+			std::cout << ")";
+
+		std::cout << "\n";
+	}
+};
+
 int main()
 {
 	Table table;
 	BarGraph bg; table.attach(&bg);
+	PieGraph pg; table.attach(&pg);
 	table.edit();
 }
 // PieGraph 도 만들어서 붙여 보세요
