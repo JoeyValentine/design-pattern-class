@@ -47,8 +47,15 @@ public:
 		v.pop_back();
 		delete p;
 	}
+	// template method : 
+	// factory method : 객체를 생성하기 위한 인터페이스를 정의하고 사용하지만
+	//					어떤 객체를 만들지는 파생 클래스가 결정한다.
+	//					"객체의 생성을 파생 클래스에 위임하는 패턴"
+	//			=> 결국 코드 구조는 "template method" 와 동일하게 됩니다.
 	virtual Shape* CreateShape() = 0;
 };
+
+
 
 class AddRectCommand : public AddCommand
 {
