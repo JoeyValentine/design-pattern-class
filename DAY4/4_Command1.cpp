@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stack>
 #include "Helper.h"
 
 class Shape
@@ -86,6 +87,7 @@ public:
 int main()
 {
 	std::vector<Shape*> v;
+	std::stack<ICommand*> cmd_stack;
 
 	while (1)
 	{
@@ -99,17 +101,37 @@ int main()
 			pcmd = new AddRectCommand(v); // 사각형을 추가하는 일을
 										// 하는 명령객체를 생성해서
 			pcmd->execute();
+			cmd_stack.push(pcmd);
 		}
 
 		else if (cmd == 2)
 		{
 			pcmd = new AddCircleCommand(v);
 			pcmd->execute();
+			cmd_stack.push(pcmd);
 		}
 		else if (cmd == 9)
 		{
 			pcmd = new DrawCommand(v);
 			pcmd->execute();
+			cmd_stack.push(pcmd);
+		}
+		else if (cmd == 0)
+		{
+			if (!cmd_stack.empty())
+			{
+				pcmd = cmd_stack.top();
+				cmd_stack.pop();
+
+				if (pcmd->can_undo())
+				{
+					pcmd->undo();
+
+					delete pcmd; // redo 도 되게 하려면 delete 하지말고
+								 // redo_stack.push(pcmd) 로 보관하세요
+				}
+
+			}
 		}
 	}
 }
