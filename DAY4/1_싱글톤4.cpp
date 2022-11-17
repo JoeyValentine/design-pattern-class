@@ -15,7 +15,7 @@ public:
 	{
 		if (pinstance == nullptr)
 			pinstance = new Cursor;
-		return instance;
+		return *pinstance; 
 	}
 };
 Cursor* Cursor::pinstance = nullptr;

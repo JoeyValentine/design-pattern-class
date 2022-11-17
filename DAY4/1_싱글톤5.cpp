@@ -14,7 +14,6 @@ private:
 	static Cursor* pinstance;
 	static std::mutex mtx;
 public:
-
 	static Cursor& getInstance()
 	{
 		mtx.lock();
@@ -23,7 +22,7 @@ public:
 			pinstance = new Cursor;
 	
 		mtx.unlock();
-		return instance;
+		return *pinstance;
 	}
 };
 Cursor* Cursor::pinstance = nullptr;
