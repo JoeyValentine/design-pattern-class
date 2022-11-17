@@ -27,7 +27,14 @@ public:
 		return *pinstance;
 	}
 	*/
-	// 최초 호출 : 
+	// 최초 호출 : if 문이 한번이면 되는 것을 2회를 사용한다.
+	//           "if 문 추가 사용" 때문에 오버헤드있음
+	// 나머지 호출 : lock/unlock 을 사용하지 않기 때문에 빨라진다.
+	
+	// "DCLP(Double Check Locking Pattern)" 이라고 불리는 기술
+	// C#, Java 등의 언어에서는 꽤 유명한 모델!
+	// C++ 에서는 절대 사용하지 마세요 - 버그 입니다.
+	// ( 2004년 이전까지 널리 사용되었는데, 2004년 논문으로 버그라고 발표)               
 	static Cursor& getInstance()
 	{
 		if (pinstance == nullptr)
@@ -35,7 +42,9 @@ public:
 			mtx.lock();
 		
 			if (pinstance == nullptr)
+			{
 				pinstance = new Cursor;
+			}
 			
 			mtx.unlock();
 		}
