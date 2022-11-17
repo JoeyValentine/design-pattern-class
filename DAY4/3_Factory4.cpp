@@ -61,7 +61,22 @@ public:
 	void draw() override { std::cout << "draw Rect" << std::endl; }
 
 	static Shape* Create() { return new Rect; }
+
+	// static 멤버 데이타는 결국 전역변수와 유사합니다.
+	// Rect 객체를 생성하지 않아도 static 멤버 데이타는 생성됩니다.
+	// => ar 의 생성자는 main 이전에 호출된다는 의미
+	static AutoRegister ar;
 };
+AutoRegister Rect::ar(1, &Rect::Create);
+
+
+// Rect::ar 의 생성자 - 최초에 1회 실행
+// new Rect()	=> Rect 생성자 호출
+// new Rect()   => Rect 생성자 호출
+
+
+
+
 
 
 class Circle : public Shape
