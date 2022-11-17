@@ -86,6 +86,11 @@ int main()
 	factory.Register(2, blueRect);
 	factory.Register(3, blueCircle);
 
+	// prototype 패턴
+	// => 견본을 미리 만들어 놓고
+	// => 견본의 복사를 통해서 새로운 객체를 생성한다.
+
+//	factory.ShowPrototype(); // 등록된 모든 견본을 보여 준다.
 
 
 
