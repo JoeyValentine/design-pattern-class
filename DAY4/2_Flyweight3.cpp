@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include "helper.h"
 
 // SRP ( Single Responsibility Principle )
 // => 하나의 클래스는 하나의 책임만 부여 하자.
@@ -23,12 +24,13 @@ public:
 // Image 객체를 생성해서 관리하는 기능을 수행하는 클래스
 class ImageFactory
 {
+	MAKE_SINGLETON(ImageFactory)
+
 	std::map<std::string, Image*> image_map;
 public:
 	Image* Create(const std::string& url)
 	{
 		auto ret = image_map.find(url);
-
 		Image* img = nullptr;
 
 		if (ret == image_map.end())
@@ -45,7 +47,7 @@ public:
 
 int main()
 {
-	ImageFactory factory;
+	ImageFactory& factory = ImageFactory::getInstance();
 
 	Image* img1 = factory.Create("www.naver.com/a.png");
 	img1->Draw();
