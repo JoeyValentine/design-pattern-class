@@ -30,14 +30,18 @@ struct ICommand
 	virtual ~ICommand() {}
 };
 
+// 생성할 객체가 한개라면
+// C++ 진영에서는 "factory method" 보다는 "템플릿"을 사용하는것이
+// 편리 합니다.
 
-class AddRectCommand : public ICommand
+template<typename T>
+class AddCommand : public ICommand
 {
 	std::vector<Shape*>& v;
 public:
-	AddRectCommand(std::vector<Shape*>& v) : v(v) {}
+	AddCommand(std::vector<Shape*>& v) : v(v) {}
 
-	virtual void execute()  override { v.push_back(new Rect); }
+	virtual void execute()  override { v.push_back(new T); }
 	virtual bool can_undo() override { return true; }
 	virtual void undo()     override
 	{
@@ -49,22 +53,7 @@ public:
 };
 
 
-class AddCircleCommand : public ICommand
-{
-	std::vector<Shape*>& v;
-public:
-	AddCircleCommand(std::vector<Shape*>& v) : v(v) {}
 
-	virtual void execute()  override { v.push_back(new Circle); }
-	virtual bool can_undo() override { return true; }
-	virtual void undo()     override
-	{
-		Shape* p = v.back();
-		v.pop_back();
-
-		delete p;
-	}
-};
 
 class DrawCommand : public ICommand
 {
@@ -97,14 +86,14 @@ int main()
 
 		if (cmd == 1)
 		{
-			pcmd = new AddRectCommand(v);
+			pcmd = new AddCommand<Rect>(v);
 			pcmd->execute();
 			cmd_stack.push(pcmd);
 		}
 
 		else if (cmd == 2)
 		{
-			pcmd = new AddCircleCommand(v);
+			pcmd = new AddCommand<Circle>(v);
 			pcmd->execute();
 			cmd_stack.push(pcmd);
 		}
