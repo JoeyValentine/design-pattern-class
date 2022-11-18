@@ -14,7 +14,10 @@ public:
 		handle = ec_make_window(&handler, "A");
 	}
 
-	int handler(int hwnd, int msg, int a, int b)
+	// 핵심
+	// 멤버 함수        : 인자로 this가 추가됩니다
+	// static 멤버 함수 : 인자로 this 추가 안됩니다.
+	static int handler(int hwnd, int msg, int a, int b)
 	{
 		switch (msg)
 		{
@@ -26,7 +29,6 @@ public:
 };
 
 
-
 int main()
 {	
 	Window w;
@@ -34,3 +36,6 @@ int main()
 
 	ec_process_message();
 }
+
+//Point pt;
+//pt.set(10, 20); // set(&pt, 10, 20) 으로 변경되는 것 입니다.
