@@ -35,8 +35,6 @@ public:
 		penWidth = p->penWidth;
 	}
 
-
-
 	void DrawLine(int x1, int y1, int x2, int y2)
 	{
 	}
@@ -56,7 +54,6 @@ int main()
 	int token = g.Save();	// 캡슐화를 위배 하지 않고
 							// 객체의 상태를 저장했다가 
 							// 복구 할수 있게한다.
-
 	g.SetStrokeColor(1);
 	g.SetStrokeWidth(20);
 	g.DrawLine(0, 0, 300, 300);
@@ -66,6 +63,13 @@ int main()
 	g.Restore(token);
 	g.DrawLine(0, 0, 300, 300);
 	g.DrawLine(0, 0, 400, 400);
+
+	// graphics 객체의 상태를 저장하기 위해서
+	// => 아래 처럼 만들면 g의 내부 상태를 외부에서 꺼낸후
+	//    저장하는 코드 입니다.
+	// => 캡슐화를 위배 하는 코드 입니다.
+//	auto state = g.get_state(); // 상태 데이타를 꺼내서
+//	vector.push_back(state); // 별도의 vector 에 저장
 }
 
 
