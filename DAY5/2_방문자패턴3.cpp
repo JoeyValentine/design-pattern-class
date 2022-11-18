@@ -36,7 +36,11 @@ public:
 	void set_title(const std::string& s) { title = s; }
 
 	virtual void command() = 0;
+
+	// 핵심 : 모든 메뉴는 방문자를 받을수 있어야 한다.
+	virtual void Accept(IMenuVisitor* visitor) = 0;
 };
+
 
 
 class MenuItem : public BaseMenu
@@ -50,7 +54,16 @@ public:
 		std::cout << get_title() << " 메뉴가 선택됨" << std::endl;
 		_getch();
 	}
+
+	virtual void Accept(IMenuVisitor* visitor) override
+	{
+		// MenuItem 은 복합객체가 아니므로 자신만 전달하면 됩니다.
+		visitor->visit(this);
+	}
 };
+
+
+
 
 class PopupMenu : public BaseMenu
 {
@@ -90,8 +103,32 @@ public:
 
 	}
 
+	virtual void Accept(IMenuVisitor* visitor) override
+	{
+		// 1. 자신을 방문자에 먼저 보내고
+		visitor->visit(this);
+
+		// 2. 자신이 가진 모든 하위 메뉴에 방문자를 방문 시킵니다.
+		for (auto p : v)
+			p->Accept(visitor);
+	}
 };
 
+// 메뉴를 방문 하다가 팝업메뉴를 만나면 타이틀을 변경하는 방문자
+class PopupMenuTitleChangeVisitor : public IMenuVisitor
+{
+public:
+	virtual void visit(MenuItem* mi) override {}
+
+	virtual void visit(PopupMenu* pm) override 
+	{
+		std::string title = pm->get_title();
+
+		title = "[ " + title + " ]";
+
+		pm->set_title(title);
+	}
+};
 
 
 
@@ -114,7 +151,7 @@ int main()
 	pm2->add_menu(new MenuItem("GREEN", 22));
 	pm2->add_menu(new MenuItem("BLUE", 23));
 
-	PoupMenuTitleChangeVisitor pmv;
+	PopupMenuTitleChangeVisitor pmv;
 	root->Accept(&pmv);	// root의 모든 하위 메뉴를
 						// 방문해서 popupmenu 의 타이틀을 변경
 						// 하는 방문자!
