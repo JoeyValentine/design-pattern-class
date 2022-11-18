@@ -54,7 +54,7 @@ public:
 			return;
 
 		// 2. 처리 되지 않은 경우 "부모 윈도우가 있다면 전달" 합니다.
-		if (prent a!= nullptr)
+		if (parent != nullptr)
 			parent->HandleLButtonDown();
 	}
 
@@ -64,17 +64,13 @@ public:
 std::map<int, Window*> Window::this_map;
 
 
-
-
-
-
 class MainWindow : public Window
 {
 public:
 	virtual bool OnLButtonDown()
 	{
 		std::cout << "MainWindow LBUTTONDOWN" << std::endl;
-		return false;
+		return true;
 	}
 };
 
@@ -84,7 +80,7 @@ public:
 	virtual bool OnLButtonDown()
 	{
 		std::cout << "ImageView LBUTTONDOWN" << std::endl;
-		return false;
+		return true;
 	}
 };
 
