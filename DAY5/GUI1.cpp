@@ -11,10 +11,13 @@ int handler(int hwnd, int msg, int a, int b)
 	}
 	return 0;
 }
+
 int main()
 {
 	int h1 = ec_make_window(&handler, "A");
 	int h2 = ec_make_window(&handler, "B");
+
+	ec_add_child(h1, h2); // h2 를 h1 의 자식윈도우로 붙여 달라.
 
 	ec_process_message();
 }
