@@ -28,16 +28,21 @@ ShapeMoveVisitor v;
 
 // 방문자 패턴으로 디자인 하면
 // 클래스의 추가   : 어렵다. "IMenuVisitor" 를 생각해 보세요
+//					"DIP" 위반 아닌가요 ?
+//					"DIP를 위반 해서 클래스 추가가 어려워진것"
 					struct IMenuVisitor
 					{
 						virtual void visit(MenuItem* mi) = 0;
-						virtual void visit(PopupMenu* pm) = 0;
+						virtual void visit(PopupMenu* pm) =0; 
 						virtual ~IMenuVisitor() {}
 					};
+
 
 // 가상 함수의 추가 : 쉽다. 
 //				=> 실제로 가상함수를 추가하는 것이 아니라
 //				=> 가상함수가 하는 일을 방문자 객체로 만들면 된다는 의미
 
-
+					
+// 방문자
+// "타입의 확장" 이 아닌 "가상함수의 확장" 에 개념
 
