@@ -84,5 +84,8 @@ int main()
 
 	// mh => oh => th 순서로 요청이 전달됩니다.
 
-	mh.Handle(99);
+//	mh.Handle(99);
+//	mh.Handle(110);
+//	mh.Handle(10);
+	mh.Handle(12);
 }
