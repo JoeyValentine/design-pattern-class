@@ -118,7 +118,12 @@ public:
 class PopupMenuTitleChangeVisitor : public IMenuVisitor
 {
 public:
-	virtual void visit(MenuItem* mi) override {}
+	virtual void visit(MenuItem* mi) override 
+	{
+		std::string title = mi->get_title();
+		title = "*" + title;
+		mi->set_title(title);
+	}
 
 	virtual void visit(PopupMenu* pm) override 
 	{
@@ -129,6 +134,8 @@ public:
 		pm->set_title(title);
 	}
 };
+
+// MenuItem 의 경우 타이틀 앞에 * 붙여 보세요
 
 
 
