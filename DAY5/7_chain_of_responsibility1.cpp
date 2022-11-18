@@ -89,3 +89,9 @@ int main()
 //	mh.Handle(10);
 	mh.Handle(12);
 }
+
+// GUI 에서 이벤트 처리시 아주 널리 사용됩니다.
+// => IOS 의 responder chain!!
+// MFC 메뉴 처리시 - Command Routing 기술
+// WPF 메뉴 처리의 - Command Binding 등
+// 모두 책임의 전가 입니다.
