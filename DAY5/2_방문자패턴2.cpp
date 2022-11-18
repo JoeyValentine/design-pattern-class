@@ -24,21 +24,32 @@ public:
 	virtual void visit(T& e) override { e *= 2; }
 };
 
+// STL 자체는 방문자 패턴으로 설계되지 않았읍니다.
+// STL 확장해서 Accept 추가!
+template<typename T>
+class MyList : public std::list<T>, public IContainer<T>
+{
+public:
+	using std::list<T>::list; // list 의 모든 생성자도 사용가능하게
+							  // 생성자 상속
 
-
-
-
-
+	virtual void Accept(IVisitor<T>* visitor) override
+	{
+		// 결국, 여기서 자신의 모든 요소를 방문자에 보내면 됩니다.
+		for (auto& e : *this) // "*this" 자신, 즉 list 입니다.
+			visitor->visit(e);
+	}
+};
 
 int main()
 {
-	std::list<int> s = { 1,2,3,4,5,6,7,8,9,10 };
+	MyList<int> s = { 1,2,3,4,5,6,7,8,9,10 };
 
 	TwiceVisitor<int> tv;	
 	s.Accept(&tv);
 
-	ShowVisitor<int> sv;	
-	s.Accept(&sv);
+//	ShowVisitor<int> sv;	
+//	s.Accept(&sv);
 }
 
 
