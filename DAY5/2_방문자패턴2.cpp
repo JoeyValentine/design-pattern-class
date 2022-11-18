@@ -18,11 +18,15 @@ template<typename T> struct IContainer
 //==========================================
 // 방문자들
 // 핵심 : 방문자는 "요소 한개"에 대한 연산을 정의 하는 객체일뿐입니다.
-template<typename T> class TwiceVisitor
+template<typename T> class TwiceVisitor : public IVisitor<T>
 {
 public:
 	virtual void visit(T& e) override { e *= 2; }
 };
+
+
+
+
 
 
 
