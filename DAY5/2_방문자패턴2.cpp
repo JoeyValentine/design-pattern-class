@@ -24,6 +24,28 @@ public:
 	virtual void visit(T& e) override { e *= 2; }
 };
 
+// ShowVisitor 만들어 보세요
+template<typename T> class ShowVisitor : public IVisitor<T>
+{
+public:
+	virtual void visit(T& e) override 
+	{
+		std::cout << e << ", ";
+	}
+};
+
+template<typename T> class ZeroVisitor : public IVisitor<T>
+{
+public:
+	virtual void visit(T& e) override
+	{
+		e = 0;
+	}
+};
+
+
+
+
 // STL 자체는 방문자 패턴으로 설계되지 않았읍니다.
 // STL 확장해서 Accept 추가!
 template<typename T>
@@ -41,6 +63,8 @@ public:
 	}
 };
 
+
+
 int main()
 {
 	MyList<int> s = { 1,2,3,4,5,6,7,8,9,10 };
@@ -48,8 +72,13 @@ int main()
 	TwiceVisitor<int> tv;	
 	s.Accept(&tv);
 
-//	ShowVisitor<int> sv;	
-//	s.Accept(&sv);
+	ShowVisitor<int> sv;	
+	s.Accept(&sv);
+
+	ZeroVisitor<int> zv; // 모든 요소를 0으로 하는 방문자
+	s.Accept(&zv);
+
+	s.Accept(&sv);
 }
 
 
