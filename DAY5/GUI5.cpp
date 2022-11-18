@@ -80,7 +80,8 @@ public:
 	virtual bool OnLButtonDown()
 	{
 		std::cout << "ImageView LBUTTONDOWN" << std::endl;
-		return true;
+		// return true;	// 이벤트 처리 종료해 달라!
+		return false;   // 부모 윈도우에도 전달해 달라.
 	}
 };
 
